@@ -1,0 +1,10 @@
+{
+  "display_name": "P&C Vault",
+  "version": "1.0.0",
+  "author": "",
+  "description": "Character vault — AI mini-apps for SillyTavern.",
+  "requires": [],
+  "optional": [],
+  "js": "index.js",
+  "auto_update": false
+}
