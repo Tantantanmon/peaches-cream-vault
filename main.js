@@ -102,6 +102,7 @@ const SCREENS = {
   'fourth-wall':      () => import('./screens/fourth-wall.js').then(m => m.render()),
   'interrogation':    () => import('./screens/interrogation.js').then(m => m.render()),
   'apology':          () => import('./screens/apology.js').then(m => m.render()),
+  'clinic':           () => import('./screens/clinic.js').then(m => m.render()),
 };
 
 const TOPBAR_LABELS = {
@@ -116,6 +117,7 @@ const TOPBAR_LABELS = {
   'fourth-wall':      '4th Wall',
   'interrogation':    'Interrogation',
   'apology':          'Sorry Not Sorry',
+  'clinic':           'Clinic',
 };
 
 const BACK_MAP = {
