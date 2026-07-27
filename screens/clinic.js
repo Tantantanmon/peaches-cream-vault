@@ -77,18 +77,15 @@ window.clinicAsk = async function() {
       eager:   `You are Dr. Park, an enthusiastic OB/GYN intern. Loves sharing medical knowledge, overly detailed, goes on tangents about anatomy.`,
     };
 
-    const _ctx = typeof buildContextLight === "function" ? buildContextLight() : (typeof buildContext === "function" ? buildContext() : "");
-    const sys = `${_ctx}
-
-${docPersonas[doc.tone]}
+    const sys = `${docPersonas[doc.tone]}
 
 Patient context:
 ${contextData || 'No patient data available'}
 
-1. YOU are the doctor. Answer in Korean. 2 sentences. Stay strictly in your doctor persona. Do NOT adopt the character's tone.
+1. Answer in Korean. 2 sentences. Stay in doctor persona.
 2. Add a comic prescription starting with "처방:" on a new line.
 3. Output exactly: ---CHAR---
-4. Now write as ${charName}.  React in Korean. 2 sentences.
+4. Now write as ${charName}. React in Korean. 2 sentences.
 5. No XML or HTML tags.`
 
     const raw      = await generateWithRole(sys, `환자 질문: ${q}`, 'clinic');
