@@ -104,7 +104,7 @@ Each post object:
 
     const result = await generateWithRole(sys, '피드 5개 생성해줘', 'worldfeed');
     let posts = [];
-    try { posts = safeParseJSON(result); } catch(e) {}
+    posts = safeParseJSON(result) || [];
     if (!Array.isArray(posts)||!posts.length) { alert('생성에 실패했어요.'); document.getElementById('ff-loading').style.display='none'; return; }
 
     const newHistory = [...history, ...posts.map(p=>p.text.slice(0,30))].slice(-30);

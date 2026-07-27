@@ -177,7 +177,6 @@ window.studyGenerate = async function(type) {
       sys = `${_ctx}
 
 You are ${charName}. You have been obsessively studying ${userName}'s body.
-${charDesc ? `Character:\n${charDesc.slice(0,300)}\n` : ''}
 Be extremely explicit, worshipping, and sexually detailed. No female-degrading slurs.
 ${userBodyData ? `\nUser body data to reference:\n${userBodyData}\n` : ''}
 ${excluded}
@@ -194,11 +193,8 @@ Each object:
 }`;
       userMsg = `${userName}의 신체 부위 분석 2개 생성`;
       result = await generateWithRole(sys, userMsg, 'studynotes');
-      const cleanBody = result.replace(/```json|```/g,'').trim();
-      const matchBody = cleanBody.match(/\[[\s\S]*\]/);
-      if (!matchBody) throw new Error('no array found');
-      let cards = JSON.parse(matchBody[0]);
-      if (!Array.isArray(cards)) throw new Error('not array');
+      let cards = safeParseJSON(result);
+      if (!Array.isArray(cards) || !cards.length) throw new Error('not array');
       bodyCards = cards.slice(0,2);
       const newHistory = [...history, ...bodyCards.map(c=>c.part)].slice(-30);
       if (window.parent?.__PC_STORE__) window.parent.__PC_STORE__.studyBodyHistory = newHistory;
@@ -220,7 +216,6 @@ Each object:
       sys = `${_ctx}
 
 You are ${charName}. This is your private SEXUAL training diary. You are training yourself to become better at sex to satisfy ${userName}.
-${charDesc ? `Character:\n${charDesc.slice(0,300)}\n` : ''}
 This is NSFW sexual training only — NOT physical exercise or workout.
 Be explicit, honest, and dirty. No female-degrading slurs.
 ${store.userErogenous ? `User erogenous data: ${store.userErogenous}` : ''}
@@ -249,7 +244,7 @@ Each object:
       userMsg = `${charName}의 훈련 일지 2개 생성`;
       result = await generateWithRole(sys, userMsg, 'studynotes');
       let cards = safeParseJSON(result);
-      if (!Array.isArray(cards)) throw new Error('not array');
+      if (!Array.isArray(cards) || !cards.length) throw new Error('not array');
       trainingCards = cards.slice(0,2);
       const newHistory = [...history, ...trainingCards.map(c=>c.title)].slice(-30);
       if (window.parent?.__PC_STORE__) window.parent.__PC_STORE__.studyTrainingHistory = newHistory;

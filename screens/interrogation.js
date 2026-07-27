@@ -135,9 +135,9 @@ window.intGenerate = async function() {
 
   const inq = INQUISITORS[selectedInquisitor] || INQUISITORS.detective;
   const inqPrompt = inq.prompt.replace(/\$?\{char\}/g, charName).replace(/\$?\{user\}/g, userName);
-  const ctx = typeof buildContext === 'function' ? buildContext() : '';
+  const _ctx = typeof buildContext === 'function' ? buildContext() : '';
 
-  const sys = `${ctx}
+  const sys = `${_ctx}
 
 ${inqPrompt}
 

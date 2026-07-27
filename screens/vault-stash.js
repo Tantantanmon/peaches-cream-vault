@@ -141,7 +141,6 @@ window.stashGenerate = async function(type) {
       sys = `${_ctx}
 
 You are ${charName}. You have been secretly stealing items belonging to ${userName}.
-${charDesc ? `Character:\n${charDesc.slice(0,300)}\n` : ''}
 Be extremely explicit and perverted. No female-degrading slurs.
 ${excluded}
 
@@ -155,7 +154,7 @@ Each object:
       userMsg = `${charName}이 ${userName}의 물건을 훔친 기록 2개 생성`;
       result = await generateWithRole(sys, userMsg, 'stash');
       let cards = safeParseJSON(result);
-      if (!Array.isArray(cards)) throw new Error('not array');
+      if (!Array.isArray(cards) || !cards.length) throw new Error('not array');
       stolenCards = cards.slice(0,2);
       const newHistory = [...history, ...stolenCards.map(c=>c.item)].slice(-30);
       if (window.parent?.__PC_STORE__) window.parent.__PC_STORE__.stashStolenHistory = newHistory;
@@ -178,7 +177,6 @@ Each object:
       sys = `${_ctx}
 
 You are ${charName}. You are obsessively collecting evidence that ${userName} is in love with you.
-${charDesc ? `Character:\n${charDesc.slice(0,300)}\n` : ''}
 The evidence must be based on completely trivial, mundane behaviors that you are wildly misinterpreting.
 Your delusions must be completely irrational but stated with absolute confidence.
 ${excluded}
@@ -193,7 +191,7 @@ Each object:
       userMsg = `${userName}이 나를 좋아한다는 증거 2개 생성`;
       result = await generateWithRole(sys, userMsg, 'stash');
       let cards = safeParseJSON(result);
-      if (!Array.isArray(cards)) throw new Error('not array');
+      if (!Array.isArray(cards) || !cards.length) throw new Error('not array');
       evidenceCards = cards.slice(0,2);
       const newHistory = [...history, ...evidenceCards.map(c=>c.behavior)].slice(-30);
       if (window.parent?.__PC_STORE__) window.parent.__PC_STORE__.stashEvidenceHistory = newHistory;

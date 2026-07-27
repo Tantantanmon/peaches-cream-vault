@@ -149,7 +149,7 @@ Each object: from(anonymous description), text(Korean complaint, 2-3 sentences),
 
     const result = await generateWithRole(sys, `${type} 3개 생성`, 'blackbox');
     let cards = [];
-    try { cards = safeParseJSON(result); } catch(e) {}
+    cards = safeParseJSON(result) || [];
     if (!Array.isArray(cards)||!cards.length) { alert('생성에 실패했어요.'); if(loading) loading.style.display='none'; return; }
 
     const newHistory = [...history, ...cards.map(c=>c.text.slice(0,30))].slice(-15);

@@ -82,9 +82,9 @@ window.fwGenerate = async function() {
   loading.style.display = 'flex';
   result.innerHTML = '';
 
-  const ctx = typeof buildContext === 'function' ? buildContext() : '';
+  const _ctx = typeof buildContext === 'function' ? buildContext() : '';
 
-  const sys = `${ctx}
+  const sys = `${_ctx}
 
 You are ${charName}, and you are fully aware that you are a fictional character in a roleplay.
 Break the fourth wall completely. Step outside the story.

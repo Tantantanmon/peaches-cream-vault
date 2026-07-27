@@ -88,7 +88,7 @@ ${contextData || 'No patient data available'}
 1. YOU are the doctor. Answer in Korean. 2 sentences. Stay strictly in your doctor persona. Do NOT adopt the character's tone.
 2. Add a comic prescription starting with "처방:" on a new line.
 3. Output exactly: ---CHAR---
-4. Now write as ${charName}. ${charDesc ? `Character: ${charDesc.slice(0,300)}` : ''} Speak strictly in ${charName}'s tone and personality. React in Korean. 2 sentences.
+4. Now write as ${charName}.  React in Korean. 2 sentences.
 5. No XML or HTML tags.`
 
     const raw      = await generateWithRole(sys, `환자 질문: ${q}`, 'clinic');

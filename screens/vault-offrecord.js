@@ -119,7 +119,7 @@ Each: text(1 sentence Korean, explicit sexual confession), comment(2 line Korean
 
     const result = await generateWithRole(sys, '카드 3장 생성해줘', 'offrecord');
     let cards = [];
-    try { cards = safeParseJSON(result); } catch(e) {}
+    cards = safeParseJSON(result) || [];
     if (!Array.isArray(cards)||!cards.length) { alert('생성에 실패했어요.'); if(loading) loading.style.display='none'; return; }
 
     const newHistory = [...history, ...cards.map(c=>c.text)].slice(-30);

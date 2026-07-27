@@ -167,7 +167,6 @@ window.dlGenerate = async function() {
     const sys = `${_ctx}
 
 You are writing a dream diary entry for ${charName} about ${userName}.
-${charDesc?`Character description:\n${charDesc.slice(0,300)}\n`:''}
 ${charName ? `\n` : ''}
 ${up?`User persona:\n${up}\n`:''}
 
@@ -185,7 +184,7 @@ Return ONLY a JSON object (no markdown):
 
     const result = await generateWithRole(sys, '꿈 일기 작성해줘', 'dreamlog');
     let dream = null;
-    try { dream = safeParseJSON(result); } catch(e) {}
+    dream = safeParseJSON(result);
 
     if (!dream || !dream.body) { alert('생성에 실패했어요.'); }
     else {
