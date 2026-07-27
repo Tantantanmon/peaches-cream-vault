@@ -103,6 +103,7 @@ const SCREENS = {
   'interrogation':    () => import('./screens/interrogation.js').then(m => m.render()),
   'apology':          () => import('./screens/apology.js').then(m => m.render()),
   'clinic':           () => import('./screens/clinic.js').then(m => m.render()),
+  'sexting':          () => import('./screens/sexting.js').then(m => m.render()),
 };
 
 const TOPBAR_LABELS = {
@@ -118,6 +119,7 @@ const TOPBAR_LABELS = {
   'interrogation':    'Interrogation',
   'apology':          'Sorry Not Sorry',
   'clinic':           'Clinic',
+  'sexting':          'Sexting',
 };
 
 const BACK_MAP = {
@@ -131,6 +133,7 @@ const BACK_MAP = {
   'fourth-wall':      'vault',
   'interrogation':    'vault',
   'clinic':           'vault',
+  'sexting':          'vault',
   'apology':          'vault',
 };
 
