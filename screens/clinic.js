@@ -69,15 +69,18 @@ window.clinicAsk = async function() {
   };
 
   const cName = (typeof charName !== 'undefined' && charName) ? charName : 'the character';
+  const cCtx = typeof buildContextLight === 'function' ? buildContextLight() : (typeof buildContext === 'function' ? buildContext() : '');
+
   const sys = docPersonas[doc.tone] + `
 
+${cCtx ? `[Context]\n${cCtx}\n` : ''}
 Patient question (Korean): ${q}
 
 Instructions:
 1. Answer in Korean. 2 sentences max. Stay in your doctor persona.
 2. Add a comic prescription starting with exactly "처방:" on a new line.
 3. Then write exactly: ---CHAR---
-4. Then write ${cName}'s reaction in Korean. 2 sentences.
+4. Then write ${cName}'s reaction in Korean. 2 sentences. Use character's personality from context.
 5. Plain text only. No XML, no HTML tags.`;
 
   try {
