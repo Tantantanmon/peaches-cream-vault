@@ -85,12 +85,28 @@ async function generateWithRole(systemPrompt, userPrompt, appName) {
       console.warn(`[${MODULE_NAME}] profile generate failed, fallback to main`, e);
     }
   }
-  return await c.generateRaw({
-    systemPrompt: systemPrompt || '',
-    prompt: userPrompt || '',
-    max_new_tokens: tokens,
-    streaming: false,
-  });
+  // Main API — setExtensionPrompt로 시스템 주입 후 generateRaw
+  const { setExtensionPrompt } = c;
+  try {
+    setExtensionPrompt(MODULE_NAME + '_app_sys', systemPrompt || '', 1, 0);
+    const result = await c.generateRaw(userPrompt || ' ', {
+      max_new_tokens: tokens,
+      system_prompt: systemPrompt || '',
+    });
+    setExtensionPrompt(MODULE_NAME + '_app_sys', '', 1, 0);
+    return result;
+  } catch(e) {
+    // fallback: 구버전 객체 방식
+    try {
+      setExtensionPrompt(MODULE_NAME + '_app_sys', '', 1, 0);
+    } catch(_) {}
+    return await c.generateRaw({
+      systemPrompt: systemPrompt || '',
+      prompt: userPrompt || '',
+      max_new_tokens: tokens,
+      streaming: false,
+    });
+  }
 }
 
 function getCurrentCharName() { try { return ctx().name2 || '{{char}}'; } catch(e) { return '{{char}}'; } }
