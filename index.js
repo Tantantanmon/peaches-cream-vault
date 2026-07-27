@@ -57,9 +57,9 @@ async function generateWithRole(systemPrompt, userPrompt, appName) {
   const c     = ctx();
   const store = getStore();
   const APP_TOKENS = {
-    offrecord:300, worldfeed:700, blackbox:400,
-    dreamlog:300, stash:300, studynotes:300,
-    clinic:400, apology:300,
+    offrecord:600, worldfeed:800, blackbox:600,
+    dreamlog:500, stash:600, studynotes:600,
+    clinic:500, apology:600, fourthwall:500, interrogation:600,
   };
   const tokens = (appName && APP_TOKENS[appName]) ? APP_TOKENS[appName] : (store.config.maxTokens || 1000);
 

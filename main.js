@@ -64,6 +64,32 @@ function buildContext() {
 
 window.buildContext = buildContext;
 
+// ── 가벼운 컨텍스트 (JSON 생성 앱용 — 채팅 히스토리 제외)
+function buildContextLight() {
+  const lines = [];
+  if (charDesc)  lines.push(`[Character]\n${charDesc.slice(0, 500)}`);
+  if (store.charBody || store.userBody) {
+    const parts = [];
+    if (store.charBody)  parts.push(`${charName}: ${store.charBody}`);
+    if (store.userBody)  parts.push(`${userName}: ${store.userBody}`);
+    lines.push(`[Appearance]\n${parts.join('\n')}`);
+  }
+  if (store.charErogenous || store.userErogenous) {
+    const parts = [];
+    if (store.charErogenous) parts.push(`${charName}: ${store.charErogenous}`);
+    if (store.userErogenous) parts.push(`${userName}: ${store.userErogenous}`);
+    lines.push(`[Intimacy]\n${parts.join('\n')}`);
+  }
+  if (userPersona) lines.push(`[User Persona]\n${userPersona}`);
+  // 채팅은 최근 5개만
+  const chat = getChat ? getChat(5) : [];
+  if (chat.length) lines.push(`[Recent Chat]\n${chat.map(m=>`${m.name||m.role}: ${m.content}`).join('\n')}`);
+  return lines.join('\n\n');
+}
+window.buildContextLight = buildContextLight;
+
+
+
 const SCREENS = {
   'vault':            () => import('./screens/vault.js').then(m => m.render()),
   'vault-offrecord':  () => import('./screens/vault-offrecord.js').then(m => m.render()),
