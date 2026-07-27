@@ -112,7 +112,7 @@ window.bbGenerate = async function(type) {
     const excluded = '';
     const isUserSender = Math.random() < 0.33;
 
-    const _ctx = typeof buildContext === "function" ? buildContext() : "";
+    const _ctx = typeof buildContextLight === "function" ? buildContextLight() : (typeof buildContext === "function" ? buildContext() : "");
     let sys;
     if (type === 'threat') {
       sys = `${_ctx}
@@ -122,7 +122,7 @@ ${charDesc?`Character: ${charDesc.slice(0,300)}\n`:''}
 ${charName ? `\n` : ''}
 ${excluded}
 
-Generate exactly 3 threat letter objects. Return ONLY a JSON array (no markdown).
+Generate exactly 3 threat letter objects. IMPORTANT: Your response must be ONLY a valid JSON array. No explanation, no markdown, no text before or after. Start with [ and end with ].
 Senders are anonymous but ${charName} can guess who it is based on clues.
 ${isUserSender ? `One letter must be from ${userName} (but sent anonymously). ${charName} immediately recognizes it's them.` : `All senders are from ${charName}'s world — rivals, ex-lovers, jealous fans, colleagues, etc. Match the character's world/occupation.`}
 Mix tones: genuine threat, NSFW threat, comic/petty threat. Explicit content allowed. No female-degrading slurs.
@@ -137,7 +137,7 @@ ${charDesc?`Character: ${charDesc.slice(0,300)}\n`:''}
 ${charName ? `\n` : ''}
 ${excluded}
 
-Generate exactly 3 complaint objects. Return ONLY a JSON array (no markdown).
+Generate exactly 3 complaint objects. IMPORTANT: Your response must be ONLY a valid JSON array. No explanation, no markdown, no text before or after. Start with [ and end with ].
 Complainants are anonymous but ${charName} can guess who it is.
 ${isUserSender ? `One complaint must be from ${userName} (but filed anonymously). ${charName} immediately recognizes it.` : `All complainants are from ${charName}'s world — teammates, rivals, ex-lovers, officials, fans, etc. Match the character's world/occupation.`}
 Mix tones: NSFW complaint, serious complaint, absurd/comic complaint. Explicit content allowed. No female-degrading slurs.

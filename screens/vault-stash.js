@@ -131,7 +131,7 @@ window.stashGenerate = async function(type) {
   const cd = window.parent?.__PC_STORE__ || store;
 
   try {
-    const _ctx = typeof buildContext === "function" ? buildContext() : "";
+    const _ctx = typeof buildContextLight === "function" ? buildContextLight() : (typeof buildContext === "function" ? buildContext() : "");
     let sys, userMsg, result;
 
     if (type === 'stolen') {

@@ -156,7 +156,7 @@ window.apoGenerate = async function() {
   document.getElementById('apo-loading').style.display = 'flex';
   document.getElementById('apo-result').innerHTML = '';
 
-  const _ctx = typeof buildContext === "function" ? buildContext() : "";
+  const _ctx = typeof buildContextLight === "function" ? buildContextLight() : (typeof buildContext === "function" ? buildContext() : "");
   const sys = `${_ctx}
 
 You are ${charName}.
@@ -199,7 +199,7 @@ window.petGenerate = async function() {
   document.getElementById('pet-loading').style.display = 'flex';
   document.getElementById('pet-result').innerHTML = '';
 
-  const _ctx = typeof buildContext === "function" ? buildContext() : "";
+  const _ctx = typeof buildContextLight === "function" ? buildContextLight() : (typeof buildContext === "function" ? buildContext() : "");
   const sys = `${_ctx}
 
 You are ${charName}.

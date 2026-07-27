@@ -91,7 +91,7 @@ window.otrGenerate = async function(type) {
     const history  = type==='cog' ? (store.cogHistory||[])  : (store.darkHistory||[]);
     const excluded = '';
 
-    const _ctx = typeof buildContext === "function" ? buildContext() : "";
+    const _ctx = typeof buildContextLight === "function" ? buildContextLight() : (typeof buildContext === "function" ? buildContext() : "");
     let sys;
     if (type === 'cog') {
       sys = `${_ctx}
@@ -102,7 +102,8 @@ ${charName ? `\n` : ''}
 ${excluded}
 
 IMPORTANT: Be creative. Do NOT reference specific chat events.
-Return ONLY a JSON array of 3 objects (no markdown).
+IMPORTANT: Your response must be ONLY a valid JSON array. No explanation, no markdown, no text before or after. Start with [ and end with ].
+Return ONLY a JSON array of 3 objects.
 Each: text(1 sentence Korean, secret SFW action), comment(2 line Korean inner monologue).`
     } else {
       sys = `${_ctx}
@@ -113,7 +114,8 @@ ${charName ? `\n` : ''}
 ${excluded}
 
 IMPORTANT: Be creative. Do NOT reference specific chat events.
-Return ONLY a JSON array of 3 objects (no markdown).
+IMPORTANT: Your response must be ONLY a valid JSON array. No explanation, no markdown, no text before or after. Start with [ and end with ].
+Return ONLY a JSON array of 3 objects.
 Each: text(1 sentence Korean, explicit sexual confession), comment(2 line Korean inner monologue).`
     }
 

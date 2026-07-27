@@ -77,7 +77,7 @@ window.clinicAsk = async function() {
       eager:   `You are Dr. Park, an enthusiastic OB/GYN intern. Loves sharing medical knowledge, overly detailed, goes on tangents about anatomy.`,
     };
 
-    const _ctx = typeof buildContext === "function" ? buildContext() : "";
+    const _ctx = typeof buildContextLight === "function" ? buildContextLight() : (typeof buildContext === "function" ? buildContext() : "");
     const sys = `${_ctx}
 
 ${docPersonas[doc.tone]}

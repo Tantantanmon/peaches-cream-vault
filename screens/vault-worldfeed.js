@@ -74,7 +74,7 @@ window.ffGenerate = async function() {
     const excluded = history.length ? `\nDo NOT reuse these ideas: ${history.slice(-8).join(' / ')}` : '';
     const npcs    = cfg.npcs && cfg.npcs.length ? cfg.npcs.slice(0,8).join(', ') : '';
 
-    const _ctx = typeof buildContext === "function" ? buildContext() : "";
+    const _ctx = typeof buildContextLight === "function" ? buildContextLight() : (typeof buildContext === "function" ? buildContext() : "");
     const sys = `${_ctx}
 
 You are generating a World Feed — a fictional SNS timeline for NPCs in ${cfg.group||'this world'}.
@@ -83,7 +83,7 @@ ${charDesc?`Character: ${charDesc.slice(0,100)}\n`:''}
 NPCs who post: ${npcs||'none specified'}
 ${excluded}
 
-Generate exactly 5 post objects. Return ONLY a JSON array (no markdown).
+Generate exactly 5 post objects. IMPORTANT: Your response must be ONLY a valid JSON array. No explanation, no markdown, no text before or after. Start with [ and end with ].
 Sort by likeCount descending (most liked first).
 Mix these vibes freely: comic, fight/trolling, nsfw, serious, meme_reaction, flex/brag, reunion/hangout_plan.
 Posts feel like real SNS — short, punchy, raw. Max 2 sentences per post.
