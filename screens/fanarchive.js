@@ -40,7 +40,10 @@ export function render() {
     document.head.appendChild(s);
   }
 
-  const npcs = store.fanFeedConfig?.npcs || [];
+  const fanCfg = (typeof window.parent?.__PC_GET_FAN_CONFIG__ === 'function')
+    ? window.parent.__PC_GET_FAN_CONFIG__()
+    : (store.fanFeedConfig || { group:'', npcs:[] });
+  const npcs = fanCfg.npcs || [];
   const npcName = npcs.length ? npcs[Math.floor(Math.random() * npcs.length)] : null;
   const cName = (typeof charName !== 'undefined' && charName) ? charName : 'the character';
 
@@ -119,7 +122,10 @@ window.faGenerate = async function() {
 
   const cName = (typeof charName !== 'undefined' && charName) ? charName : 'the character';
   const cd = (typeof store !== 'undefined') ? store : {};
-  const charInfo = cd.charBody ? `${cName} appearance: ${cd.charBody.slice(0,200)}` : '';
+  const charInfo = [
+    charDesc ? `${cName} character info: ${charDesc.slice(0,300)}` : '',
+    cd.charBody ? `${cName} appearance: ${cd.charBody.slice(0,150)}` : '',
+  ].filter(Boolean).join('\n');
 
   const sys = `You are writing an intentionally terrible BL (Boys Love) fan fiction.
 Characters: ${cName} (main character) × ${npcName} (NPC/side character)
@@ -157,7 +163,13 @@ Output format (JSON, no markdown):
   try {
     const raw = await generateWithRole(sys, '팬픽 생성', 'fanarchive');
     clearInterval(iv);
-    const parsed = safeParseJSON(raw);
+    // 내장 파서
+    let parsed = null;
+    try {
+      const cleaned = raw.replace(/```json|```/g,'').trim();
+      const objMatch = cleaned.match(/\{[\s\S]*\}/);
+      if (objMatch) parsed = JSON.parse(objMatch[0]);
+    } catch(e) {}
     if (!parsed || !parsed.body) throw new Error('parse failed');
     currentFic = parsed;
     if (loading) loading.style.display = 'none';

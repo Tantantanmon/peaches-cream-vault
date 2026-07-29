@@ -2,7 +2,9 @@
 
 export function render() {
   syncStore();
-  const cfg = store.fanFeedConfig || { group:'', npcs:[] };
+  const cfg = (typeof window.parent?.__PC_GET_FAN_CONFIG__ === 'function')
+    ? window.parent.__PC_GET_FAN_CONFIG__()
+    : (store.fanFeedConfig || { group:'', npcs:[] });
   const area = document.getElementById('scroll-area');
   area.style.background = '#f2f2f2';
 
@@ -114,10 +116,15 @@ window.ffSaveConfig = function() {
   const group = document.getElementById('ff-group')?.value.trim() || '';
   const npcs  = Array.from(document.getElementById('ff-npc-wrap')?.querySelectorAll('.vs-tag')||[])
                   .map(t => t.textContent.replace('×','').trim());
-  syncStore();
-  store.fanFeedConfig = { group, npcs };
-  if (window.parent?.__PC_STORE__) window.parent.__PC_STORE__.fanFeedConfig = { group, npcs };
-  if (saveStore) saveStore();
+  const cfg = { group, npcs };
+  if (typeof window.parent?.__PC_SAVE_FAN_CONFIG__ === 'function') {
+    window.parent.__PC_SAVE_FAN_CONFIG__(cfg);
+  } else {
+    syncStore();
+    store.fanFeedConfig = cfg;
+    if (window.parent?.__PC_STORE__) window.parent.__PC_STORE__.fanFeedConfig = cfg;
+    if (saveStore) saveStore();
+  }
   showToast('저장됐어요 ✓');
 };
 
