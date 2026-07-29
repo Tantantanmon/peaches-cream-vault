@@ -104,6 +104,7 @@ const SCREENS = {
   'apology':          () => import('./screens/apology.js').then(m => m.render()),
   'clinic':           () => import('./screens/clinic.js').then(m => m.render()),
   'sexting':          () => import('./screens/sexting.js').then(m => m.render()),
+  'fanarchive':       () => import('./screens/fanarchive.js').then(m => m.render()),
 };
 
 const TOPBAR_LABELS = {
@@ -120,6 +121,7 @@ const TOPBAR_LABELS = {
   'apology':          'Sorry Not Sorry',
   'clinic':           'Clinic',
   'sexting':          'Sexting',
+  'fanarchive':       'Fan Archive',
 };
 
 const BACK_MAP = {
@@ -134,6 +136,7 @@ const BACK_MAP = {
   'interrogation':    'vault',
   'clinic':           'vault',
   'sexting':          'vault',
+  'fanarchive':       'vault',
   'apology':          'vault',
 };
 
