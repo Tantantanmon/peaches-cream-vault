@@ -5,7 +5,7 @@ let isGenerating = false;
 
 export function render() {
   const area = document.getElementById('scroll-area');
-  area.style.background = 'linear-gradient(160deg, #e8f0ff 0%, #f0f4ff 40%, #e0eaff 100%)';
+  area.style.background = 'linear-gradient(160deg,#f8f8f8 0%,#ececec 100%)';
 
   if (!document.getElementById('sxt-style')) {
     const s = document.createElement('style');
@@ -200,7 +200,7 @@ window.sxtStart = async function() {
   const sys = `${ctx}
 
 You are ${cName}. You are sending the first sexting message to ${uName}.
-Start with something bold, teasing, and sexually charged — a combination of a suggestive photo and a short message.
+Start with something bold, teasing, and sexually charged. Send a photo with the first message only sometimes — a short provocative text message is enough on its own.
 
 Rules:
 - Be explicit and graphic. This is sexting between consenting adults. Nothing is off limits.
@@ -279,7 +279,7 @@ ${history}
 Rules:
 - Respond in character. Be explicit, arousing, and graphic — match or escalate the energy.
 - React directly to what ${uName} just said/sent.
-- Include a photo if it fits naturally (not required every time).
+- Send a photo only every 5-6 turns, not every reply. Most replies should be text only. Only include PHOTO line when it's a photo turn.
 - Short replies feel more like real texting — 1-3 sentences max for text.
 - Photo descriptions should be specific and visually explicit based on your appearance.
 - Write in Korean unless character speaks otherwise.

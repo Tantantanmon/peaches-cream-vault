@@ -60,6 +60,10 @@ export function render() {
           <div class="vh-app-icon">${interrogationIcon()}</div>
           <div><div class="vh-app-name">Interrogation</div><div class="vh-app-sub">취조실 심문</div></div>
         </div>
+        <div class="vh-app-card" onclick="router.go('fanarchive')">
+          <div class="vh-app-icon">${fanArchiveIcon()}</div>
+          <div><div class="vh-app-name">Fan Archive</div><div class="vh-app-sub">개쓰레기 팬픽 감상</div></div>
+        </div>
         <div class="vh-app-card" onclick="router.go('sexting')">
           <div class="vh-app-icon">${sextingIcon()}</div>
           <div><div class="vh-app-name">Sexting</div><div class="vh-app-sub">야한 문자 주고받기</div></div>
@@ -92,6 +96,7 @@ function stashIcon()      { return `<svg viewBox="0 0 24 24"><path d="M21 16V8a2
 function studyNotesIcon() { return `<svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>`; }
 function fourthWallIcon()    { return `<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M20.188 10.934c.2.431.312.912.312 1.066s-.112.635-.312 1.066C19.175 15.206 15.857 18 12 18c-3.857 0-7.175-2.794-8.188-4.934C3.612 12.635 3.5 12.154 3.5 12s.112-.635.312-1.066C4.825 8.794 8.143 6 12 6c3.857 0 7.175 2.794 8.188 4.934z"/></svg>`; }
 function interrogationIcon() { return `<svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>`; }
+function fanArchiveIcon() { return `<svg viewBox="0 0 24 24"><path d="M20 17v-12c0-1.121-.879-2-2-2s-2 .879-2 2v12l2 2 2-2z"/><path d="M16 7h4"/><path d="M18 19h-13a2 2 0 1 1 0-4h4a2 2 0 1 0 0-4h-3"/></svg>`; }
 function sextingIcon()    { return `<svg viewBox="0 0 24 24"><path d="M12 2c0 0 3 4 3 7c0 1.5-1 3-1 3s2-1 2-4c2 2 3 4 3 6a6 6 0 0 1-12 0c0-4 3-8 5-12z"/></svg>`; }
 function clinicIcon()     { return `<svg viewBox="0 0 24 24"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>`; }
 function apologyIcon()    { return `<svg viewBox="0 0 24 24"><path d="M12 21C12 21 4 13.5 4 8.5C4 5.42 6.42 3 9.5 3C11.04 3 12 4 12 4C12 4 12.96 3 14.5 3C17.58 3 20 5.42 20 8.5C20 13.5 12 21 12 21Z"/><line x1="9" y1="11" x2="15" y2="11"/><line x1="10.5" y1="9" x2="10.5" y2="13"/></svg>`; }
